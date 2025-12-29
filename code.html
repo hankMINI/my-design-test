@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workout Library</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "surface-dark": "#1a2e22",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar hiding for horizontal scroll areas */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col antialiased selection:bg-primary selection:text-black">
+<!-- Mobile Container -->
+<div class="relative flex flex-col flex-grow w-full max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-2xl overflow-hidden pb-24">
+<!-- Top App Bar -->
+<header class="flex items-center justify-between p-5 pt-8 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm sticky top-0 z-20">
+<h1 class="text-3xl font-extrabold tracking-tight">Library</h1>
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-3xl text-slate-900 dark:text-white" style="font-variation-settings: 'FILL' 1, 'wght' 400;">account_circle</span>
+</button>
+</header>
+<!-- Search Bar -->
+<div class="px-5 mb-4">
+<div class="relative flex items-center w-full h-12 rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border border-slate-200 dark:border-white/5 overflow-hidden group focus-within:ring-2 focus-within:ring-primary/50 transition-all">
+<div class="flex items-center justify-center pl-4 text-slate-400 dark:text-white/40">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full h-full bg-transparent border-none text-base text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/40 focus:ring-0 px-3 font-medium" placeholder="Find workouts, exercises..." type="text"/>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 px-5 pb-2 overflow-x-auto hide-scrollbar mb-6">
+<!-- Active Chip -->
+<button class="flex h-9 shrink-0 items-center justify-center px-5 rounded-full bg-primary text-black font-bold text-sm shadow-[0_0_10px_rgba(19,236,91,0.3)] transition-transform active:scale-95">
+                All
+            </button>
+<!-- Inactive Chips -->
+<button class="flex h-9 shrink-0 items-center justify-center px-5 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white font-semibold text-sm whitespace-nowrap transition-colors hover:bg-slate-50 dark:hover:bg-white/5 active:scale-95">
+                Strength
+            </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-5 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white font-semibold text-sm whitespace-nowrap transition-colors hover:bg-slate-50 dark:hover:bg-white/5 active:scale-95">
+                Cardio
+            </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-5 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white font-semibold text-sm whitespace-nowrap transition-colors hover:bg-slate-50 dark:hover:bg-white/5 active:scale-95">
+                HIIT
+            </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-5 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white font-semibold text-sm whitespace-nowrap transition-colors hover:bg-slate-50 dark:hover:bg-white/5 active:scale-95">
+                Yoga
+            </button>
+<button class="flex h-9 shrink-0 items-center justify-center px-5 rounded-full bg-white dark:bg-surface-dark border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white font-semibold text-sm whitespace-nowrap transition-colors hover:bg-slate-50 dark:hover:bg-white/5 active:scale-95">
+                Stretching
+            </button>
+</div>
+<!-- Section: Featured Plans -->
+<div class="flex flex-col mb-8">
+<div class="flex items-center justify-between px-5 mb-3">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Featured Plans</h2>
+<button class="text-primary text-sm font-bold">See All</button>
+</div>
+<div class="flex gap-4 px-5 overflow-x-auto hide-scrollbar pb-4 snap-x snap-mandatory">
+<!-- Card 1 -->
+<div class="relative flex-none w-[280px] h-[360px] rounded-2xl overflow-hidden snap-center group cursor-pointer shadow-lg dark:shadow-none">
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Athletic woman doing yoga pose outdoors in nature" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBYvD7ghZ7mEU8H56PIW3qoWmDz0riJjJBim8vq7PYR765oGAirus1zRRJRd5Uw_DwdY-y5AMsp54KahiQ8bNaY3_PabgfVVoD5d7n5e6kfSnFKYDwJWow97EdUaD77Wvdx0sIS77HTJpOMQCT2DS0tZeM8Bgv7BeDZR8Fxeyeeqegj3YcZ-eF_jeRWH8OsURIPdhF4u3qdATcYEh6XJsW5zu0TPkBCIi_rGD0rGnsHLcfYzD8SFhPqyR4hDOHZjCAkMPJ_9zqk_b0');"></div>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/50 to-transparent"></div>
+<!-- Content -->
+<div class="absolute bottom-0 left-0 w-full p-5 flex flex-col gap-1">
+<div class="flex gap-2 mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md text-white border border-white/10">Yoga</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary text-black">New</span>
+</div>
+<h3 class="text-2xl font-bold text-white leading-tight">Morning Flow &amp; Stretch</h3>
+<p class="text-slate-300 text-sm font-medium mt-1">4 Weeks • Beginner • 20 min/day</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="relative flex-none w-[280px] h-[360px] rounded-2xl overflow-hidden snap-center group cursor-pointer shadow-lg dark:shadow-none">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Man lifting heavy weights in a dark gym setting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADLdGoJFPC0aNmhOol5RRw7HXJQnQUABR-TEyEqLuABp3D5I5n5PQ5cxEUYplrADKOSTXnvHLbkqhOKQtFIfbmk-IB2prflxJzgqlGktsSE1AzbSBXWq8QxvxxIyXo-FWkaikbZ6dkzZThfpt0lStSFAGUIY4cBOw14aliHwal-3cRYqQ-uoyAx5L_v4Zd_TMAMjYxQ2N5yK1DcRxzJAADrUwkLx-fVf7i4Wudp49r8mCI7MF8bXz2g3fBQTx3AhfAdyupr5BLKA0');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/50 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-5 flex flex-col gap-1">
+<div class="flex gap-2 mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md text-white border border-white/10">Hypertrophy</span>
+</div>
+<h3 class="text-2xl font-bold text-white leading-tight">Power Muscle Builder</h3>
+<p class="text-slate-300 text-sm font-medium mt-1">8 Weeks • Advanced • 60 min/day</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="relative flex-none w-[280px] h-[360px] rounded-2xl overflow-hidden snap-center group cursor-pointer shadow-lg dark:shadow-none">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Person running on a track during sunset" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAncReflD4pwg96-E71PKCtsF6HksjGME6ZGMWqhXAP3HrSD8JE08V7Yk6NyDIDxrmnc2nWu69R2OX-3fGULlNM7u-mwQUsvJ7GiFcV7KJ8umDPF38j79uphkXc09etAAlpn1xq0oonOp1NKNbIW268ElRDU03Fb7MqHVRwlvyop6nxZSotTUquptOHi8fc3GJEHniS374A9yDZOI0K2O5BF64jIUUnSjxNP8tZIeBzmYNytodfP24uhIrvvd0CnuD7lGWM68NR_LQ');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/50 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-5 flex flex-col gap-1">
+<div class="flex gap-2 mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md text-white border border-white/10">Cardio</span>
+</div>
+<h3 class="text-2xl font-bold text-white leading-tight">Couch to 5K Runner</h3>
+<p class="text-slate-300 text-sm font-medium mt-1">6 Weeks • Beginner • 30 min/day</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Quick Workouts (Horizontal Small Cards) -->
+<div class="flex flex-col mb-8">
+<div class="flex items-center justify-between px-5 mb-3">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Quick Hits</h2>
+</div>
+<div class="flex gap-3 px-5 overflow-x-auto hide-scrollbar snap-x">
+<!-- Quick Card 1 -->
+<div class="flex-none w-40 flex flex-col gap-2 snap-start cursor-pointer group">
+<div class="w-full aspect-video rounded-lg overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-110" data-alt="Close up of abs during a workout" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsTQGMSTev50AROQIbTvtxRpuvG-nzzL-dosqto1ADCtSR2EDC6DMDf9nCGxNlUUyewHoV7SkFbbsSkC7lXwb--RRp2AI2kGriW8ReBUSEbRTr5v6MRoPv0kW0xddc9JkI0Pl3CwX5VU66dkooAVgUKyEqO0Zb328PVYiPvV2-h3ZbAgspKw3raMmhHXZhIuDb0Md82FV9zCFDhlruBGkprDI8NNQUXnvgtHsllst24RRHCS6PrtXHuDrFjs-0_qWqSihIIQI1r_k');"></div>
+<div class="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded text-[10px] font-bold text-white">10:00</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white text-sm leading-tight truncate">Abs of Steel</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Core • High Intensity</p>
+</div>
+</div>
+<!-- Quick Card 2 -->
+<div class="flex-none w-40 flex flex-col gap-2 snap-start cursor-pointer group">
+<div class="w-full aspect-video rounded-lg overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-110" data-alt="Man doing lunges in gym" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCTJI__G2P0zOIVlac4p4wdEo_h9sj5k-uEsORZKWErzvjmQyW8eb2ZtF315nMBYSO9UmpHgTaGMEQP9ItR7dycJG4Kk60aoSW9E-M2fOToPB2RE01IE5880LOpea_WV6gKr47658rtC-Bfk10nmINLLlDSllIKuHz3v1L23-glxKjkVoF62DxO0UkECm7wmh2n1rCYTgU8mgBIMBimiJXDSOKaDVrAJztRugaI3rhs9dIq6u5wVgaXkIikBQtQqSl7HqEp8Dtl-GE');"></div>
+<div class="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded text-[10px] font-bold text-white">15:00</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white text-sm leading-tight truncate">Leg Destroyer</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Lower Body • Strength</p>
+</div>
+</div>
+<!-- Quick Card 3 -->
+<div class="flex-none w-40 flex flex-col gap-2 snap-start cursor-pointer group">
+<div class="w-full aspect-video rounded-lg overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-110" data-alt="Woman doing pushups" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDoeH0mPrj4V4yEZdIm5fZfb2l3lzvY2-pJ9SzISVEi98_vjb3lZKMelZMzR1J3E7v3Nwz9qYzsthbvCl75w5IY03B-293uNyvBcOzN1NEU-uHnX_oaO1ovFh6lgp4YlX_ar1_LdVGbX2dzYIkGgucLcVm-7kgYWMScBv1txh7QbyPbGwSEQR5trssY1iwsgqusTfbbd1FGBxwzA7vmPydm1cGTYNBWIaXyRi_tvk1ZwXTiPT4Qkw4dYbDsPwYCgp-RDv6CGfNd2B0');"></div>
+<div class="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded text-[10px] font-bold text-white">12:00</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white text-sm leading-tight truncate">Upper Body Blast</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Chest &amp; Arms • Strength</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Exercises List -->
+<div class="flex flex-col px-5 gap-4">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Popular Exercises</h2>
+<!-- List Item 1 -->
+<div class="flex items-center gap-4 p-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm dark:shadow-none border border-slate-100 dark:border-white/5 active:scale-[0.99] transition-transform cursor-pointer">
+<div class="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800">
+<div class="w-full h-full bg-cover bg-center" data-alt="Woman holding barbell for deadlift" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6aU0CLATQHj5X474p5HHlxrlGgvM8XRd77bnslXkgMRj-8iHrhvXCiTPw24x2WyHc4MKEV_QhRP2ChnenM7I7JBiofeO5v0iTiJruqrsguuoqeCP3rcNJqmmIl3DB6O0QPImMS9OoootNrlZjyWU2hloehEVQKEVPjfVkDmteRuUC7KQPGsKnCqUJvg_9H8mubPZUM_jG4mK48RU9OOVYHD96A3Nq-khkeOrYf3HRN4zP6NWvwgeVFJKHY0zfCbB3cc45SuUcOE0');"></div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-base font-bold text-slate-900 dark:text-white truncate">Deadlift</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 truncate">Hamstrings, Glutes, Lower Back</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white">
+<span class="material-symbols-outlined text-xl">chevron_right</span>
+</button>
+</div>
+<!-- List Item 2 -->
+<div class="flex items-center gap-4 p-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm dark:shadow-none border border-slate-100 dark:border-white/5 active:scale-[0.99] transition-transform cursor-pointer">
+<div class="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800">
+<div class="w-full h-full bg-cover bg-center" data-alt="Two women doing lunges in gym" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDnKM6Ly2oFRWFA5SoKwze6OfoRTcXSU8U1dngegfAIAL6FJf2wEEx7ufcEiQxQev3kQFLrucrio_sCPcUN7t-2cZih1rkllWhFkGH6NFthSgLMg73-_tNZYKM7Tt3Xp5Mg86oxOgdtXHkM_J9uW8OJsaL1B9dPx6Cq7mtjh-ecG6MfGOUXtrUqtAD-rFSv5KbTn3TvrNhUYuWoIwqJpGwChcw1gGb8STxlB-Dj8DnhlKHv3Wedy5GxiSfc2Irx4gToZiq2kBx9ykg');"></div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-base font-bold text-slate-900 dark:text-white truncate">Walking Lunges</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 truncate">Quadriceps, Glutes</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white">
+<span class="material-symbols-outlined text-xl">chevron_right</span>
+</button>
+</div>
+<!-- List Item 3 -->
+<div class="flex items-center gap-4 p-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm dark:shadow-none border border-slate-100 dark:border-white/5 active:scale-[0.99] transition-transform cursor-pointer">
+<div class="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800">
+<div class="w-full h-full bg-cover bg-center" data-alt="Person doing bench press" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaof5aGW4pwm55LPGPka6Ms-DkZbdXnucZtnjzolbV1Lt0onltA0L1GhUUSuCTRhSkdODmNfOgjiwabWUaeyC8o6LG2r4F7ed7VteOfyH9aw-rhTB_9ksXABVNsjMjYiPzATSqdBsp_Ewxk65Vfq2N_7xLsj4WE1YdNOADo-PfHmKHFAo3sO_zR-lsq9O0PS7LKlDn-I03gYRIEW3LVwRSB7Xn8Mr6jr6Q7q43JeyOPf1Mkc2QXMZZ5Wkm8XIGzyfygqjcxK0kr7U');"></div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-base font-bold text-slate-900 dark:text-white truncate">Bench Press</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 truncate">Chest, Triceps, Shoulders</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white">
+<span class="material-symbols-outlined text-xl">chevron_right</span>
+</button>
+</div>
+<!-- List Item 4 -->
+<div class="flex items-center gap-4 p-3 rounded-xl bg-white dark:bg-surface-dark shadow-sm dark:shadow-none border border-slate-100 dark:border-white/5 active:scale-[0.99] transition-transform cursor-pointer">
+<div class="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800">
+<div class="w-full h-full bg-cover bg-center" data-alt="Man doing pullups on bar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBUD7AW3YNJZLJ_-k-sFQ4TPZJN7GSkPKAMdvTHHnRrvDkCGW8oAuXFHoR69AfUySEzsbrAPSISsI1EDz3gmKDCXMdzpdCj1yFevsHEEBdhJj9ZTgyPoMNUxRxd0-qsevX6L30gWMNMJGF_zKSeiODZ15dvr4xQ5TUT_jdLrUVS8TOeoRS3tegyxhX3NOZfuEF-6QINmTYm3SG90BdmlFuSLtkOK9Lwfs4j30Kk_tQcvmul6JQS_IQCcbifE45t-eSK9AAjSa_PO4Q');"></div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-base font-bold text-slate-900 dark:text-white truncate">Pull-ups</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 truncate">Lats, Biceps</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white">
+<span class="material-symbols-outlined text-xl">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Spacer for Bottom Nav -->
+<div class="h-24"></div>
+</div>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-full z-50 max-w-md mx-auto left-0 right-0">
+<!-- Glassmorphism Effect -->
+<div class="absolute inset-0 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-lg border-t border-slate-200 dark:border-white/5"></div>
+<div class="relative flex justify-between items-center px-6 h-20 pb-4">
+<button class="flex flex-col items-center justify-center gap-1 w-16 h-full group text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 w-16 h-full group text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl fill-current" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<span class="text-[10px] font-bold">Library</span>
+</button>
+<!-- Floating Log Button -->
+<button class="absolute left-1/2 -top-6 -translate-x-1/2 w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(19,236,91,0.4)] hover:shadow-[0_0_20px_rgba(19,236,91,0.6)] hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-black text-3xl">add</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 w-16 h-full group text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors pl-8">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">restaurant</span>
+<span class="text-[10px] font-medium">Nutrition</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 w-16 h-full group text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</div>
+</nav>
+</body></html>
